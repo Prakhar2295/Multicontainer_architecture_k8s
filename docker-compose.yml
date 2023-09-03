@@ -1,0 +1,66 @@
+version: '3.5'
+services:
+  bank_note:
+    container_name: frontend
+    image: prakhar22/banknote:db
+    depends_on:
+      mongo_db:
+        condition: service_healthy
+    ports:
+      - "5000:8501"
+    networks:
+      - front-tier
+      - back-tier
+    
+  mongo_db:
+    container_name: db
+    image: prakhar22/mongo1
+    build:
+      context: mongo_db
+      dockerfile: Dockerfile
+    volumes:
+      - myvolume:/data
+    healthcheck:
+      test: ["CMD","mongosh"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    ports:
+      - "8080:27017"
+    networks:
+      - back-tier
+
+networks:
+  front-tier:
+  back-tier:
+
+volumes:
+  myvolume:
+    driver: local
+    driver_opts:
+      type: none
+      device: /d/FSDS/MAchine_Learning/Bank_notes_mongo
+      o: bind
+
+
+
+
+
+
+    
+
+
+    
+    
+     
+
+
+    
+
+
+
+
+    
+    
+    
+      
