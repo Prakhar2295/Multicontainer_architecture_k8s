@@ -3,6 +3,9 @@ services:
   bank_note:
     container_name: frontend
     image: prakhar22/banknote:db
+    build:
+      context: ./
+      dockerfile: Dockerfile
     depends_on:
       mongo_db:
         condition: service_healthy
@@ -13,7 +16,7 @@ services:
       - back-tier
     
   mongo_db:
-    container_name: db
+    container_name: ${container_name}
     image: prakhar22/mongo1
     build:
       context: mongo_db
@@ -29,6 +32,7 @@ services:
       - "8080:27017"
     networks:
       - back-tier
+
 
 networks:
   front-tier:

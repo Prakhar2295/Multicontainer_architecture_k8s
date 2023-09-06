@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+      tier: frontend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: frontend
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+        - name: banknote
+          image: prakhar22/banknote:db
+          ports:
+            - name: frontservice
+              containerPort: 8501
+          env:
+            - name: MONGO_DB_HOST
+              value: mongodbservice

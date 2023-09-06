@@ -1,4 +1,5 @@
 # This is a Streamlit App
+import os
 import pymongo
 from pymongo import MongoClient
 import streamlit as st
@@ -8,7 +9,11 @@ import pickle
 pickle_in = open("classifier.pkl", "rb")
 classifier = pickle.load(pickle_in)
 
-default_connection_url = "mongodb://db:27017/"
+mongo_host = os.environ.get("MONGO_DB_HOST","db")
+
+#default_connection_url = "mongodb://db:27017/"
+default_connection_url = f"mongodb://{mongo_host}:27017"
+
 client = pymongo.MongoClient(default_connection_url)
 
 def mongodb_insert_data(databasename,collectionname,variance,skewness,curtosis,entropy,result):
