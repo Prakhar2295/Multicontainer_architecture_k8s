@@ -2,7 +2,7 @@ version: '3.5'
 services:
   bank_note:
     container_name: frontend
-    image: prakhar22/banknote:db
+    image: prakhar22/banknote:db1
     build:
       context: ./
       dockerfile: Dockerfile
@@ -17,7 +17,7 @@ services:
     
   mongo_db:
     container_name: ${container_name}
-    image: prakhar22/mongo1
+    image: prakhar22/mongo12
     build:
       context: mongo_db
       dockerfile: Dockerfile
