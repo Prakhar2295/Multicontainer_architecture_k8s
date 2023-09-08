@@ -16,7 +16,7 @@ services:
       - back-tier
     
   mongo_db:
-    container_name: ${container_name}
+    container_name: db
     image: prakhar22/mongo12
     build:
       context: mongo_db
